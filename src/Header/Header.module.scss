@@ -1,0 +1,33 @@
+.header {
+  border: 1px solid white;
+  max-width: 600px;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  margin: 0 auto;
+  justify-content: space-between;
+
+  &__scoreCounter {
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 600;
+    padding: 10px;
+    width: 100px;
+    border-radius: 10px;
+  }
+
+  &__scoreTitle {
+    color:hsl(229, 64%, 46%);
+    font-size: 14px;
+    letter-spacing: 2px;
+  }
+
+  &__counter {
+    color: hsl(229, 25%, 31%);
+    font-weight: 700;
+    font-size: 48px;
+  }
+}
