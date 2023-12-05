@@ -1,0 +1,42 @@
+.modal {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,.3);
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all .3s linear;
+  z-index: 100;
+  
+  &__content {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    position: relative
+  }
+
+  &__title {
+    font-size: 24px;
+    color: rgb(59, 67, 99);
+    font-weight: 700;
+  }
+
+  &__close {
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    background: url(../images/icon-close.svg);
+    background-size: cover;
+    border: none;
+    position: absolute;
+    right: 20px;
+  }
+
+  &.active {
+    opacity: 1;
+    visibility: visible;
+  }
+}

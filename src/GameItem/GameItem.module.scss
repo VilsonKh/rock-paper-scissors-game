@@ -1,0 +1,54 @@
+.gameItem {
+  width: 120px;
+  height: 120px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: transform .2s linear;
+
+}
+
+:global(.rock) {
+	transform: translate(330px, 250px);
+
+	&:hover {
+		transform: translate(330px, 250px) scale(1.2);
+	}
+}
+
+:global(.lizard) {
+	transform: translate(140px, 250px);
+
+	&:hover {
+		transform: translate(140px, 250px) scale(1.2);
+	}
+}
+
+:global(.spock) {
+	transform: translate(80px, 80px);
+
+	&:hover {
+		transform: translate(80px, 80px) scale(1.2);
+	}
+}
+
+:global(.paper) {
+	transform: translate(390px, 80px);
+
+	&:hover {
+		transform: translate(390px, 80px) scale(1.2);
+	}
+}
+
+:global(.scissors) {
+	transform: translate(240px, -40px);
+
+	&:hover {
+		transform: translate(240px, -40px) scale(1.2);
+	}
+}
