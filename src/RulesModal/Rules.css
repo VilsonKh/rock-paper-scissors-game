@@ -1,0 +1,10 @@
+.rules__close {
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+  background: url("/public/images/icon-close.svg");
+  background-size: cover;
+  border: none;
+  position: absolute;
+  right: 20px;
+}

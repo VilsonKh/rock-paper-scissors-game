@@ -24,16 +24,16 @@
     font-weight: 700;
   }
 
-  &__close {
-    cursor: pointer;
-    width: 16px;
-    height: 16px;
-    background: url(../images/icon-close.svg);
-    background-size: cover;
-    border: none;
-    position: absolute;
-    right: 20px;
-  }
+  // &__close {
+  //   cursor: pointer;
+  //   width: 16px;
+  //   height: 16px;
+  //   background: url('/public/images/icon-close.svg');
+  //   background-size: cover;
+  //   border: none;
+  //   position: absolute;
+  //   right: 20px;
+  // }
 
   &.active {
     opacity: 1;

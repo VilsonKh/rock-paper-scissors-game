@@ -12,6 +12,7 @@ function App() {
     <div className={classes.app}>
       <Header/>
       <GameContent/>
+      
       <button onClick= {() => {setIsModalOpen(true)}} className={classes.buttonRules}>RULES</button>
       {isModalOpen && <RulesModal setModal={setIsModalOpen}/>}
     </div>
