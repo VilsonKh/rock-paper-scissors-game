@@ -27,3 +27,11 @@ export const iconsConfig = [
 ];
 
 export const borderWidth = 15;
+
+export const gameRules = [
+	{ icon: "paper", wins: ["rock", "spock"] },
+	{ icon: "lizard", wins: ["spock", "paper"] },
+	{ icon: "rock", wins: ["lizard", "scissors"] },
+	{ icon: "spock", wins: ["scissors", "rock"] },
+	{ icon: "scissors", wins: ["paper", "lizard"] },
+];
