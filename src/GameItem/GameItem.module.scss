@@ -1,4 +1,4 @@
-.gameItem {
+.gameItem{
   width: 120px;
   height: 120px;
   background: white;
@@ -54,6 +54,8 @@
 }
 
 :global(.active) {
-	transform: translate(0, 100px) scale(1.5);
+	transform: translate(0, 0px) scale(1.8);
+	left: 0;
+	top: 35%;
 }
 
