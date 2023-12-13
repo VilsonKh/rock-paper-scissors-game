@@ -5,24 +5,24 @@ export interface IGameItem {
 	imgLink: string;
 	color: string;
 	borderWidth?: number;
-	setIsPlaying?: (value: string) => void;
-	isPlaying: string;
+	setUserChoice?: (value: string) => void;
+	userChoice: string;
 	clazzName?: string;
 }
 
-const GameItem = ({ title, imgLink, color, borderWidth, setIsPlaying, clazzName, isPlaying }: IGameItem): JSX.Element => {
+const GameItem = ({ title, imgLink, color, borderWidth, setUserChoice, clazzName, userChoice }: IGameItem): JSX.Element => {
 	function onIconClick(e: React.MouseEvent<HTMLDivElement>) {
 		const target = e.currentTarget as HTMLElement;
 		console.log(target.getAttribute("data-choice"));
-		if (setIsPlaying) {
-			setIsPlaying(target.getAttribute("data-choice") as string);
+		if (setUserChoice) {
+			setUserChoice(target.getAttribute("data-choice") as string);
 		}
 	}
 
 	return (
 		<>
-			{!isPlaying || isPlaying === title ? (
-				<div onClick={(e) => onIconClick(e)} className={`${classes.gameItem} ${title} ${isPlaying ? "active" : ''}`} style={{ border: `${borderWidth}px solid ${color}` }} data-choice={title}>
+			{!userChoice || userChoice === title ? (
+				<div onClick={(e) => onIconClick(e)} className={`${classes.gameItem} ${title} ${userChoice ? "active" : ''}`} style={{ border: `${borderWidth}px solid ${color}` }} data-choice={title}>
 					<img src={imgLink} alt={title} />
 				</div>
 			) : null}

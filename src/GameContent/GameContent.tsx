@@ -4,7 +4,8 @@ import GameItem from "../GameItem/GameItem";
 import { borderWidth } from "../cost";
 import { useState } from "react";
 import ComputerGameItem from "../ComputerGameItem/ComputerGameItem";
-import { gameRules } from "../cost";
+import GameResult from "../GameResult/GameResult";
+import GameHeading from "../GameHeading/GameHeading";
 
 export interface IGameItem {
 	title: string;
@@ -13,55 +14,50 @@ export interface IGameItem {
 	borderWidth?: number;
 }
 
-const GameContent = (): JSX.Element => {
-	const [isPlaying, setIsPlaying] = useState<string>("");
+const GameContent = ({ setScore, score }: { setScore: (value: number) => void; score: number }) => {
+	const [userChoice, setUserChoice] = useState<string>("");
+	const [seconds, setSeconds] = useState<number>(3);
 
 	function getRandomCard() {
 		const cardsAmount = iconsConfig.length;
 		const randomNumb = Math.floor(Math.random() * cardsAmount);
-		console.log("computerChoice", iconsConfig[randomNumb])
 		return iconsConfig[randomNumb];
 	}
 
-	const computerChoice = getRandomCard()
+	const computerChoice = getRandomCard();
 
-	function getResult() {
-		for (let i = 0; i < gameRules.length; i++) {
-			if (gameRules[i].icon === isPlaying) {
-				console.log(gameRules[i].wins)
-				if (gameRules[i].wins.indexOf(computerChoice.title) >= 0) {
-					return "win";
-				} else if (isPlaying === computerChoice.title) {
-					return "draw";
-				} else {
-					return "lose";
-				}
-			}
-		}
-	}
-	console.log(getResult());
+	const ComputerGameItemProps = {
+		seconds: seconds,
+		setSeconds: setSeconds,
+		title: computerChoice.title,
+		color: computerChoice.color,
+		imgLink: computerChoice.imgLink,
+	};
+
+	const GameResultProps = {
+		userChoice: userChoice,
+		setUserChoice: setUserChoice,
+		setSeconds: setSeconds,
+	};
 
 	return (
 		<>
 			<div className={classes.gameContent}>
-				{!isPlaying && <img className={classes.gameContent__background} src="./images/bg-pentagon.svg" alt="pentagon" />}
-				{isPlaying && (
-					<div className={classes.gameContent__heading}>
-						<p className={classes.gameContent__title}>YOU PICKED</p>
-						<p className={classes.gameContent__title}>THE HOUSE PICKED</p>
-					</div>
+				{!userChoice && <img className={classes.gameContent__background} src="./images/bg-pentagon.svg" alt="pentagon" />}
+				{userChoice && (
+					<>
+						<GameHeading />
+						<ComputerGameItem {...ComputerGameItemProps} />
+					</>
 				)}
-				{isPlaying && <ComputerGameItem title={computerChoice.title} color={computerChoice.color} imgLink={computerChoice.imgLink} />}
-					{isPlaying && getResult() && <p>{getResult()}</p>}
+				{userChoice && seconds < 1 && <GameResult {...GameResultProps} />}
 				{iconsConfig.map((iconConfig: IGameItem, index) => {
 					return (
 						<GameItem
-							isPlaying={isPlaying}
-							setIsPlaying={setIsPlaying}
+							userChoice={userChoice}
+							setUserChoice={setUserChoice}
 							key={index}
-							title={iconConfig.title}
-							imgLink={iconConfig.imgLink}
-							color={iconConfig.color}
+							{...iconConfig}
 							borderWidth={borderWidth}
 						/>
 					);

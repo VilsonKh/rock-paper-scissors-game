@@ -1,21 +1,16 @@
 import { useEffect, useState } from "react";
 import classes from "./ComputerGameItem.module.scss";
-import { borderWidth, iconsConfig } from "../cost";
+import { borderWidth } from "../cost";
 
 interface IComputerChoice {
   title: string;
   imgLink: string;
   color: string;
+  seconds: number;
+  setSeconds: (value: number) => void
 }
 
-const ComputerGameItem = ({title, imgLink, color}: IComputerChoice) => {
-	const [seconds, setSeconds] = useState<number>(3);
-
-	interface IComputerChoice {
-		color: string;
-		imgLink: string;
-		title: string;
-	}
+const ComputerGameItem = ({title, imgLink, color, seconds, setSeconds}: IComputerChoice) => {
 
 	useEffect(() => {
 		if (seconds > 0) {
