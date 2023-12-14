@@ -29,7 +29,7 @@ const GameContent = () => {
 		const randomNumb = Math.floor(Math.random() * cardsAmount);
 		return iconsConfig[randomNumb];
 	}
-
+	
 	useEffect(() => {
 		setComputerChoice(getRandomCard());
 	}, [userChoice]);

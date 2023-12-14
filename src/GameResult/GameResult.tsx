@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { gameRules } from "../cost";
 import classes from "./GameResult.module.scss";
 import scoreContext from "../context/scoreContext";
@@ -12,8 +12,9 @@ interface IGameResult {
 	setComputerChoice: (value: { title: string; imgLink: string; color: string }) => void;
 }
 
-const GameResult = ({ setUserChoice, setSeconds, userChoice, computerChoice, score, setComputerChoice }: IGameResult) => {
+const GameResult = ({ setUserChoice, userChoice, computerChoice, score, setComputerChoice, setSeconds }: IGameResult) => {
 	const { increaseScore, decreaseScore } = useContext(scoreContext);
+	const [result, setResult] = useState<string>('')
 
 	function getUserResult() {
 		console.log("считаю результат");
@@ -33,6 +34,11 @@ const GameResult = ({ setUserChoice, setSeconds, userChoice, computerChoice, sco
 		}
 	}
 
+
+	useEffect(() => {
+		setResult(getUserResult() as string)
+	}, [userChoice])
+
 	function resetGame() {
 		setUserChoice("");
 		setSeconds(3);
@@ -41,7 +47,7 @@ const GameResult = ({ setUserChoice, setSeconds, userChoice, computerChoice, sco
 
 	return (
 		<div className={classes.result}>
-			<p>{getUserResult()}</p>
+			<p>{result}</p>
 			<button onClick={resetGame} className={classes.playAgain}>
 				play again
 			</button>
