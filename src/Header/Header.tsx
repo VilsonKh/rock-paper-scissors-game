@@ -1,5 +1,8 @@
+import { useContext } from "react";
 import classes from "./Header.module.scss";
-const Header = ({score}: {score:number}) => {
+import scoreContext from "../context/scoreContext";
+const Header = () => {
+  const {score} = useContext(scoreContext)
   return (
     <div className={classes.header}>
       <img src="./images/logo-bonus.svg" alt="logo" />

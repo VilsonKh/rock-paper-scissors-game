@@ -7,11 +7,11 @@ import RulesModal from './RulesModal/RulesModal';
 function App() {
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
-  const [score, setScore] = useState<number>(0)
+
   return (
     <div className={classes.app}>
-      <Header score={score}/>
-      <GameContent setScore={setScore} score={score}/>
+      <Header />
+      <GameContent />
       <button onClick= {() => {setIsModalOpen(true)}} className={classes.buttonRules}>RULES</button>
       {isModalOpen && <RulesModal setModal={setIsModalOpen}/>}
     </div>

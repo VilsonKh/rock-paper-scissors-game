@@ -2,10 +2,11 @@ import classes from "./GameContent.module.scss";
 import { iconsConfig } from "../cost";
 import GameItem from "../GameItem/GameItem";
 import { borderWidth } from "../cost";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ComputerGameItem from "../ComputerGameItem/ComputerGameItem";
 import GameResult from "../GameResult/GameResult";
 import GameHeading from "../GameHeading/GameHeading";
+import scoreContext from "../context/scoreContext";
 
 export interface IGameItem {
 	title: string;
@@ -14,17 +15,24 @@ export interface IGameItem {
 	borderWidth?: number;
 }
 
-const GameContent = ({ setScore, score }: { setScore: (value: number) => void; score: number }) => {
+const GameContent = () => {
+
+	const {score} = useContext(scoreContext)
+
 	const [userChoice, setUserChoice] = useState<string>("");
 	const [seconds, setSeconds] = useState<number>(3);
+	const [computerChoice, setComputerChoice] = useState({ title: "", imgLink: "", color: "" });
 
 	function getRandomCard() {
+		console.log("получаю рандомную карточку");
 		const cardsAmount = iconsConfig.length;
 		const randomNumb = Math.floor(Math.random() * cardsAmount);
 		return iconsConfig[randomNumb];
 	}
 
-	const computerChoice = getRandomCard();
+	useEffect(() => {
+		setComputerChoice(getRandomCard());
+	}, [userChoice]);
 
 	const ComputerGameItemProps = {
 		seconds: seconds,
@@ -38,6 +46,9 @@ const GameContent = ({ setScore, score }: { setScore: (value: number) => void; s
 		userChoice: userChoice,
 		setUserChoice: setUserChoice,
 		setSeconds: setSeconds,
+		computerChoice: computerChoice,
+		setComputerChoice: setComputerChoice,
+		score: score
 	};
 
 	return (
@@ -52,15 +63,7 @@ const GameContent = ({ setScore, score }: { setScore: (value: number) => void; s
 				)}
 				{userChoice && seconds < 1 && <GameResult {...GameResultProps} />}
 				{iconsConfig.map((iconConfig: IGameItem, index) => {
-					return (
-						<GameItem
-							userChoice={userChoice}
-							setUserChoice={setUserChoice}
-							key={index}
-							{...iconConfig}
-							borderWidth={borderWidth}
-						/>
-					);
+					return <GameItem userChoice={userChoice} setUserChoice={setUserChoice} key={index} {...iconConfig} borderWidth={borderWidth} />;
 				})}
 			</div>
 		</>

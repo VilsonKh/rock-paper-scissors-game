@@ -1,0 +1,2 @@
+export const INCREASE_SCORE = "INCREASE_SCORE";
+export const DECREASE_SCORE = "DECREASE_SCORE";

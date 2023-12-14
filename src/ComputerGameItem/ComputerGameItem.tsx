@@ -16,7 +16,7 @@ const ComputerGameItem = ({title, imgLink, color, seconds, setSeconds}: ICompute
 		if (seconds > 0) {
 			setTimeout(() => setSeconds(seconds - 1), 1000);
 		} 
-	});
+	}, [seconds]);
 	
 	return <div className={`${classes.computerGameItem}`} style={{ border: `${borderWidth}px solid ${seconds > 0 ? "gray" : color}`}}>{seconds > 0 ? seconds : <img src={imgLink} alt={title} />}</div>;
 };
