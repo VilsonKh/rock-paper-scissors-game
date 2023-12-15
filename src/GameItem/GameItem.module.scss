@@ -55,7 +55,10 @@
 
 :global(.active) {
 	transform: translate(0, 100px) scale(1.8);
-	// left: 0;
-	// top: 35%;
+}
+
+:global(.wins) {
+	transition: box-shadow 0.4s;
+	box-shadow: 0 0 0 30px rgba(255, 255, 255, 0.03), 0 0 0 60px rgba(255, 255, 255, 0.02), 0 0 0 90px rgba(255, 255, 255, 0.01);
 }
 

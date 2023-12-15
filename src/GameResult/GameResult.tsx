@@ -1,10 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import { gameRules } from "../cost";
-import classes from "./GameResult.module.scss";
+import styles from "./GameResult.module.scss";
 import scoreContext from "../context/scoreContext";
 
 interface IGameResult {
-	setUserChoice: (value: string) => void;
 	setSeconds: (value: number) => void;
 	userChoice: string;
 	computerChoice: { title: string; imgLink: string; color: string };
@@ -12,22 +11,22 @@ interface IGameResult {
 	setComputerChoice: (value: { title: string; imgLink: string; color: string }) => void;
 }
 
-const GameResult = ({ setUserChoice, userChoice, computerChoice, score, setComputerChoice, setSeconds }: IGameResult) => {
-	const { increaseScore, decreaseScore } = useContext(scoreContext);
+const GameResult = ({ userChoice, computerChoice, score, setComputerChoice, setSeconds }: IGameResult) => {
+	const { increaseScore, decreaseScore, setGameResult, resetGameResult, setUserChoice} = useContext(scoreContext);
 	const [result, setResult] = useState<string>('')
 
 	function getUserResult() {
-		console.log("считаю результат");
-		console.log(computerChoice);
 		for (let i = 0; i < gameRules.length; i++) {
 			if (gameRules[i].icon === userChoice) {
 				if (gameRules[i].wins.indexOf(computerChoice.title) >= 0) {
 					increaseScore();
+					setGameResult('user')
 					return "win";
 				} else if (userChoice === computerChoice.title) {
 					return "draw";
 				} else {
 					decreaseScore();
+					setGameResult('computer')
 					return "lose";
 				}
 			}
@@ -43,12 +42,14 @@ const GameResult = ({ setUserChoice, userChoice, computerChoice, score, setCompu
 		setUserChoice("");
 		setSeconds(3);
 		setComputerChoice({ title: "", imgLink: "", color: "" });
+		resetGameResult();
+		setResult('')
 	}
 
 	return (
-		<div className={classes.result}>
-			<p>{result}</p>
-			<button onClick={resetGame} className={classes.playAgain}>
+		<div className={styles.result}>
+			<p className={styles.result__text}>{result}</p>
+			<button onClick={resetGame} className={styles.playAgain}>
 				play again
 			</button>
 		</div>

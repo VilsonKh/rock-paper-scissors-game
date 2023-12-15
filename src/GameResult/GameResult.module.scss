@@ -9,6 +9,11 @@
 	left: 50%;
 	transform: translate(-50%, -50%);
 	text-align: center;
+	min-height: 150px;
+
+	&__text {
+		min-height: 60px;
+	}
 }
 
 .playAgain {
@@ -24,3 +29,4 @@
 	text-transform: uppercase;
 	z-index: 1;
 }
+

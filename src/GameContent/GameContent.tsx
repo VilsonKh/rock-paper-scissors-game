@@ -17,14 +17,12 @@ export interface IGameItem {
 
 const GameContent = () => {
 
-	const {score} = useContext(scoreContext)
-
-	const [userChoice, setUserChoice] = useState<string>("");
+	const {score, userChoice} = useContext(scoreContext)
 	const [seconds, setSeconds] = useState<number>(3);
-	const [computerChoice, setComputerChoice] = useState({ title: "", imgLink: "", color: "" });
+
+	const {setComputerChoice, computerChoice} = useContext(scoreContext)
 
 	function getRandomCard() {
-		console.log("получаю рандомную карточку");
 		const cardsAmount = iconsConfig.length;
 		const randomNumb = Math.floor(Math.random() * cardsAmount);
 		return iconsConfig[randomNumb];
@@ -44,7 +42,6 @@ const GameContent = () => {
 
 	const GameResultProps = {
 		userChoice: userChoice,
-		setUserChoice: setUserChoice,
 		setSeconds: setSeconds,
 		computerChoice: computerChoice,
 		setComputerChoice: setComputerChoice,
@@ -63,7 +60,7 @@ const GameContent = () => {
 				)}
 				{userChoice && seconds < 1 && <GameResult {...GameResultProps} />}
 				{iconsConfig.map((iconConfig: IGameItem, index) => {
-					return <GameItem userChoice={userChoice} setUserChoice={setUserChoice} key={index} {...iconConfig} borderWidth={borderWidth} />;
+					return <GameItem userChoice={userChoice} key={index} {...iconConfig} borderWidth={borderWidth} />;
 				})}
 			</div>
 		</>
