@@ -1,4 +1,4 @@
-import classes from "./GameContent.module.scss";
+import styles from "./GameContent.module.scss";
 import { iconsConfig } from "../cost";
 import GameItem from "../GameItem/GameItem";
 import { borderWidth } from "../cost";
@@ -16,18 +16,16 @@ export interface IGameItem {
 }
 
 const GameContent = () => {
-
-	const {score, userChoice} = useContext(scoreContext)
 	const [seconds, setSeconds] = useState<number>(3);
 
-	const {setComputerChoice, computerChoice} = useContext(scoreContext)
+	const { setComputerChoice, computerChoice, score, userChoice } = useContext(scoreContext);
 
 	function getRandomCard() {
 		const cardsAmount = iconsConfig.length;
 		const randomNumb = Math.floor(Math.random() * cardsAmount);
 		return iconsConfig[randomNumb];
 	}
-	
+
 	useEffect(() => {
 		setComputerChoice(getRandomCard());
 	}, [userChoice]);
@@ -45,13 +43,13 @@ const GameContent = () => {
 		setSeconds: setSeconds,
 		computerChoice: computerChoice,
 		setComputerChoice: setComputerChoice,
-		score: score
+		score: score,
 	};
 
 	return (
 		<>
-			<div className={classes.gameContent}>
-				{!userChoice && <img className={classes.gameContent__background} src="./images/bg-pentagon.svg" alt="pentagon" />}
+			<div className={styles.gameContent}>
+				{!userChoice && <img className={styles.gameContent__background} src="./images/bg-pentagon.svg" alt="pentagon" />}
 				{userChoice && (
 					<>
 						<GameHeading />

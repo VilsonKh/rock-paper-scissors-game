@@ -22,10 +22,12 @@ const GameItem = ({ title, imgLink, color, borderWidth, userChoice }: IGameItem)
 		}
 	}
 
+	const iconStyleClasses = `${classes.gameItem} ${title} ${userChoice ? "active" : ""} ${result === "user" ? "wins" : ""}`
+
 	return (
 		<>
 			{!userChoice || userChoice === title ? (
-				<div onClick={(e) => onIconClick(e)} className={`${classes.gameItem} ${title} ${userChoice ? "active" : ''} ${result === 'user' ? 'wins' : ''}`} style={{ border: `${borderWidth}px solid ${color}` }} data-choice={title}>
+				<div onClick={(e) => onIconClick(e)} className={iconStyleClasses} style={{ border: `${borderWidth}px solid ${color}` }} data-choice={title}>
 					<img src={imgLink} alt={title} />
 				</div>
 			) : null}
